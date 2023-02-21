@@ -3,27 +3,29 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
-
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
-import ModalScreen from '../screens/ModalScreen';
-import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
+import { ColorSchemeName, Image } from 'react-native';
+import Home from '../screens/Home';
+import Notification from '../screens/Notification';
+import Profile from '../screens/Profile';
+import Wallet from '../screens/Wallet';
+import { RootStackParamList, RootTabParamList } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import { Platform } from 'react-native';
 
-export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+export default function Navigation({
+  colorScheme,
+}: {
+  colorScheme: ColorSchemeName;
+}) {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+    >
       <RootNavigator />
     </NavigationContainer>
   );
@@ -38,11 +40,11 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
+      <Stack.Screen
+        name="Root"
+        component={BottomTabNavigator}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }
@@ -54,42 +56,102 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-      }}>
+        headerShown: false,
+        tabBarStyle: { position: 'absolute', backgroundColor: 'white' },
+        tabBarShowLabel: false,
+        tabBarItemStyle: { paddingTop: 12 },
+        headerBackgroundContainerStyle: { backgroundColor: '#171725' },
+      }}
+    >
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Modal')}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}>
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
+        name="Home"
+        component={Home}
+        options={{
+          tabBarIcon: ({ size, focused, color }) => {
+            return (
+              <Image
+                resizeMode="contain"
+                style={{
+                  tintColor: focused ? '#FC5A5A' : '#D5D5DC',
+                  width: 40,
+                  height: 40,
+                }}
+                source={require('../assets/images/home.png')}
               />
-            </Pressable>
-          ),
-        })}
+            );
+          },
+        }}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="Notification"
+        component={Notification}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ size, focused, color }) => {
+            return (
+              <Image
+                resizeMode="contain"
+                style={{
+                  tintColor: focused ? '#FC5A5A' : '#D5D5DC',
+                  width: 40,
+                  height: 40,
+                }}
+                source={require('../assets/images/notify.png')}
+              />
+            );
+          },
+          tabBarBadge: '',
+          tabBarBadgeStyle: {
+            top: Platform.OS === 'ios' ? 0 : 9,
+            backgroundColor: '#FC5A5A',
+            minWidth: 14,
+            maxHeight: 14,
+            borderRadius: 7,
+            fontSize: 10,
+            lineHeight: 13,
+            alignSelf: undefined,
+          },
+        }}
+      />
+      <BottomTab.Screen
+        name="Wallet"
+        component={Wallet}
+        options={{
+          tabBarIcon: ({ size, focused, color }) => {
+            return (
+              <Image
+                resizeMode="contain"
+                style={{
+                  tintColor: focused ? '#FC5A5A' : '#D5D5DC',
+                  width: 40,
+                  height: 40,
+                }}
+                source={require('../assets/images/wallet.png')}
+              />
+            );
+          },
+        }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarIcon: ({ size, focused, color }) => {
+            return (
+              <Image
+                resizeMode="contain"
+                style={{
+                  tintColor: focused ? '#FC5A5A' : '#D5D5DC',
+                  width: 40,
+                  height: 40,
+                }}
+                source={require('../assets/images/user.png')}
+              />
+            );
+          },
         }}
       />
     </BottomTab.Navigator>
@@ -99,9 +161,3 @@ function BottomTabNavigator() {
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
-}
