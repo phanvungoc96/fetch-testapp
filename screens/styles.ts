@@ -46,12 +46,14 @@ export default StyleSheet.create({
     fontWeight: '600',
     marginTop: 16,
     marginBottom: 8,
+    fontFamily: 'Hellix-Regular',
   },
   titleDescription: {
     color: '#B5B5BE',
     fontSize: 16,
     fontWeight: '400',
     lineHeight: 24,
+    fontFamily: 'Hellix-Regular',
   },
   shadow: {
     borderWidth: 1,
@@ -69,12 +71,14 @@ export default StyleSheet.create({
     color: '#B5B5BE',
     fontSize: 14,
     fontWeight: '600',
+    fontFamily: 'Hellix-Regular',
   },
   numberBalance: {
     color: '#171725',
     fontSize: 48,
     fontWeight: '400',
     marginTop: 8,
+    fontFamily: 'Hellix-Regular',
   },
   processBar: {
     backgroundColor: '#E2E2EA',
@@ -94,6 +98,7 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: '400',
     lineHeight: 24,
+    fontFamily: 'Hellix-Regular',
   },
   highlightButton: {
     flexDirection: 'row',
@@ -105,6 +110,7 @@ export default StyleSheet.create({
     color: '#0062FF',
     fontSize: 16,
     fontWeight: '400',
+    fontFamily: 'Hellix-Regular',
   },
   icon: {
     resizeMode: 'contain',
@@ -122,6 +128,7 @@ export default StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: '600',
+    fontFamily: 'Hellix-Regular',
   },
   date: {
     marginTop: 16,
@@ -129,6 +136,7 @@ export default StyleSheet.create({
     color: '#B5B5BE',
     fontSize: 14,
     fontWeight: '400',
+    fontFamily: 'Hellix-Regular',
   },
   wrapItem: {
     backgroundColor: 'white',
@@ -138,6 +146,7 @@ export default StyleSheet.create({
     color: 'black',
     fontSize: 18,
     fontWeight: '600',
+    fontFamily: 'Hellix-Regular',
     marginTop: 24,
     paddingLeft: 24,
   },
@@ -169,6 +178,7 @@ export default StyleSheet.create({
     color: '#0062FF',
     fontSize: 16,
     fontWeight: '600',
+    fontFamily: 'Hellix-Regular',
   },
   itemDes: {
     color: '#92929D',
@@ -176,11 +186,13 @@ export default StyleSheet.create({
     lineHeight: 24,
     paddingLeft: 16,
     marginVertical: 10,
+    fontFamily: 'Hellix-Regular',
   },
   itemNote: {
     color: '#0062FF',
     fontSize: 14,
     lineHeight: 20,
+    fontFamily: 'Hellix-Regular',
     paddingLeft: 16,
   },
 });
